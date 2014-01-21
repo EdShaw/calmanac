@@ -1,0 +1,9 @@
+---
+:orm: datamapper
+:test: riot
+:mock: mocha
+:script: jquery
+:renderer: haml
+:stylesheet: sass
+:namespace: Calmanac
+:migration_format: number
