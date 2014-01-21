@@ -41,7 +41,7 @@ module Calmanac
     def construct_calendar(cal_uri)
       components = filter_calendar(cal_uri, params["courses"])
       content_type 'text/calendar'
-      components
+      components[0]
     end
 
     get '/lectures.ics' do
