@@ -24,8 +24,8 @@ module Calmanac
 
     def filter_calendar(url, courses)
 
-      components = cache( "base-cal-#{url}", :expires_in => 60*60*6) do
-        ics = Net::HTTP.get(URI.parse(url))
+      ics = cache( "base-cal-#{url}", :expires_in => 60*60*6) do
+         Net::HTTP.get(URI.parse(url))
       end
       RiCal.parse_string(ics)
 
