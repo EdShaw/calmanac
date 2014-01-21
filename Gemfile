@@ -19,14 +19,6 @@ gem 'rake'
 # Component requirements
 gem 'sass'
 gem 'haml'
-gem 'dm-sqlite-adapter'
-gem 'dm-validations'
-gem 'dm-timestamps'
-gem 'dm-migrations'
-gem 'dm-constraints'
-gem 'dm-aggregates'
-gem 'dm-types'
-gem 'dm-core'
 
 # Test requirements
 gem 'mocha', :group => 'test', :require => false

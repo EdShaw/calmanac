@@ -1,5 +1,4 @@
 ---
-:orm: datamapper
 :test: riot
 :mock: mocha
 :script: jquery
