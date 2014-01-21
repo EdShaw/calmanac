@@ -13,6 +13,10 @@ module Calmanac
     courses = ["Advanced Security", "Visual Analytics"]
 
     get '/' do
+      "Hello! :) You can find the lecture time table <a href='./lectures.ics'>here.</a> "
+    end
+
+    get '/lectures.ics' do
 
       puts params
       ics = Net::HTTP.get(URI.parse('http://www.cs.ox.ac.uk/feeds/Timetable-Lecture.ics'))
@@ -23,6 +27,7 @@ module Calmanac
           params["courses"].include? c.summary
         end
       end
+      content_type 'text/calendar'
       components[0].to_s
     end
 
