@@ -10,23 +10,38 @@ module Calmanac
 
     enable :sessions
 
-    courses = ["Advanced Security", "Visual Analytics"]
-
     get '/' do
       "Hello! :) You can find the lecture time table <a href='./lectures.ics'>here.</a> "
     end
 
-    get '/lectures.ics' do
-
-      puts params
-      ics = Net::HTTP.get(URI.parse('http://www.cs.ox.ac.uk/feeds/Timetable-Lecture.ics'))
+    def filterCalendar(ics, courses)
       components = RiCal.parse_string(ics)
 
-      if params["courses"] then
+      if courses then
         components[0].events.select! do |c|
-          params["courses"].include? c.summary
+          courses.include? c.summary
         end
       end
+      components
+    end
+
+    get '/lectures.ics' do
+      ics = Net::HTTP.get(URI.parse('http://www.cs.ox.ac.uk/feeds/Timetable-Lecture.ics'))
+      components = filterCalendar(ics, params["courses"])
+      content_type 'text/calendar'
+      components[0].to_s
+    end
+
+    get '/practicals.ics' do
+      ics = Net::HTTP.get(URI.parse('http://www.cs.ox.ac.uk/feeds/Timetable-Practical.ics'))
+      components = filterCalendar(ics, params["courses"])
+      content_type 'text/calendar'
+      components[0].to_s
+    end
+
+    get '/classes.ics' do
+      ics = Net::HTTP.get(URI.parse('http://www.cs.ox.ac.uk/feeds/Timetable-Class.ics'))
+      components = filterCalendar(ics, params["courses"])
       content_type 'text/calendar'
       components[0].to_s
     end
