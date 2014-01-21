@@ -18,8 +18,10 @@ module Calmanac
       ics = Net::HTTP.get(URI.parse('http://www.cs.ox.ac.uk/feeds/Timetable-Lecture.ics'))
       components = RiCal.parse_string(ics)
 
-      components[0].events.select! do |c|
-        params["courses"].include? c.summary
+      if params["courses"] then
+        components[0].events.select! do |c|
+          params["courses"].include? c.summary
+        end
       end
       components[0].to_s
     end
