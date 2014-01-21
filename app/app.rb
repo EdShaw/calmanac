@@ -26,8 +26,8 @@ module Calmanac
 
       components = cache( "parsed-cal-#{url}", :expires_in => 60*60*6) do
         ics = Net::HTTP.get(URI.parse(url))
-        RiCal.parse_string(ics)
       end
+      RiCal.parse_string(ics)
 
       if courses then
         components[0].events.select! do |c|
