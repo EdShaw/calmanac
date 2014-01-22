@@ -1,6 +1,7 @@
 require 'ri_cal'
 require 'net/http'
 require "redis"
+require "sinatra"
 
 module Calmanac
   class App < Padrino::Application
@@ -18,14 +19,18 @@ module Calmanac
                                                      :port => redis.port,
                                                      :password => redis.password
                                                  ))
+
+
+
     get '/' do
-      "Hello! :) You can find the lecture time table <a href='./lectures.ics'>here.</a>."
+      puts settings.public_folder
+      send_file File.join(settings.public_folder, 'index.html')
     end
 
     def filter_calendar(url, courses)
 
       ics = cache( "base-cal-#{url}", :expires_in => 60*60*6) do
-         Net::HTTP.get(URI.parse(url))
+        Net::HTTP.get(URI.parse(url))
       end
       components = RiCal.parse_string(ics)
 
@@ -40,22 +45,30 @@ module Calmanac
 
     def construct_calendar(cal_uri)
       components = filter_calendar(cal_uri, params["courses"])
-      content_type 'text/calendar'
       components[0]
     end
 
     get '/lectures.ics' do
       cal_uri = 'http://www.cs.ox.ac.uk/feeds/Timetable-Lecture.ics'
+      if !params["debug"]
+        content_type 'text/calendar'
+      end
       construct_calendar(cal_uri).to_s
     end
 
     get '/practicals.ics' do
       cal_uri = 'http://www.cs.ox.ac.uk/feeds/Timetable-Practical.ics'
+      if !params["debug"]
+        content_type 'text/calendar'
+      end
       construct_calendar(cal_uri).to_s
     end
 
     get '/classes.ics' do
       cal_uri = 'http://www.cs.ox.ac.uk/feeds/Timetable-Class.ics'
+      if !params["debug"]
+        content_type 'text/calendar'
+      end
       construct_calendar(cal_uri).to_s
     end
 

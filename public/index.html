@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cAlmanac - Filter your timetables by course.</title>
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css">
+
+</head>
+<body>
+  Select your courses, then select which calendar you want!<br />
+  <form>
+    <select class="chosen-select" data-placeholder="Choose courses..." name="courses[]" style="width:600px;" multiple="">
+      <option>Advanced Security</option>
+      <option>Advanced Datastructures</option>
+      <option>Visual Analytics</option>
+      <option>Computational Linguistics</option>
+    </select>
+  </form>
+  <br />
+  <a id="lectures" class="calendar-link" href="./lectures.ics">Lectures</a>
+  <a id="practicals" class="calendar-link" href="./practicals.ics">Practicals</a>
+  <a id="classes" class="calendar-link" href="./classes.ics">Classes</a>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(".chosen-select")
+      .chosen({})
+      .change(function() {
+       var query = $(this).serialize();
+       $("a[href].calendar-link").each(function () {
+         $(this).attr("href", "./" + $(this).attr('id') + ".ics?" + query )
+       });
+     });
+
+  </script>
+</body>
+</html>
