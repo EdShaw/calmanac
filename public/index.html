@@ -20,7 +20,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript">
     $( function() {
-      $.ajax("./api/coursenames").done(function(data){
+      $.getJSON("./api/coursenames").done(function(data){
         var select = $("#course-select")
         data.forEach(function(name){
           select.append($("<option></option>")

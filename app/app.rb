@@ -86,9 +86,10 @@ module Calmanac
       names
     end
 
-    get '/api/coursenames' do
+    get '/api/coursenames', :cache => true do
+      expires_in 60*60*2
+      cache_key "api-courses"
       names = get_courses()
-
       content_type :json
       JSON.generate(names.to_a)
     end
