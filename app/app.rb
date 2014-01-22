@@ -29,17 +29,20 @@ module Calmanac
 
     def filter_calendar(url, courses)
 
-      ics = cache( "base-cal-#{url}", :expires_in => 60*60*6) do
-        Net::HTTP.get(URI.parse(url))
-      end
-      components = RiCal.parse_string(ics)
-
+      components = get_compontents(url)
       if courses then
         components[0].events.select! do |c|
           courses.include? c.summary
         end
       end
       components
+    end
+
+    def get_components(url)
+      ics = cache("base-cal-#{url}", :expires_in => 60*60*6) do
+        Net::HTTP.get(URI.parse(url))
+      end
+      components = RiCal.parse_string(ics)
     end
 
 
@@ -70,6 +73,18 @@ module Calmanac
         content_type 'text/calendar'
       end
       construct_calendar(cal_uri).to_s
+    end
+
+    require 'set'
+    require 'json'
+
+    get '/api/coursenames' do
+      cal_uri = 'http://www.cs.ox.ac.uk/feeds/Timetable-Lecture.ics'
+      components = get_components(cal_uri)
+      names = Set.new
+      components[0].events.each {|event| names.add(event.summary)}
+
+      JSON.generate(names.to_a)
     end
 
   end
