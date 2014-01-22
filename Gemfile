@@ -21,8 +21,8 @@ gem 'ri_cal'
 gem 'rake'
 
 # Component requirements
-#gem 'sass'
-#gem 'haml'
+gem 'sass'
+gem 'haml'
 
 # Test requirements
 gem 'mocha', :group => 'test', :require => false

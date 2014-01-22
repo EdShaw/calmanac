@@ -4,6 +4,8 @@ GEM
     activesupport (3.2.16)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    haml (4.0.5)
+      tilt
     http_router (0.11.0)
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
@@ -62,6 +64,7 @@ GEM
     riot (0.12.7)
       rr
     rr (1.1.2)
+    sass (3.2.13)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -78,6 +81,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   mocha
   oboe-heroku
   padrino (= 0.11.4)
@@ -86,3 +90,4 @@ DEPENDENCIES
   redis
   ri_cal
   riot
+  sass
