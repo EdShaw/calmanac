@@ -9,7 +9,7 @@
 <body>
   Select your courses, then select which calendar you want!<br />
   <form>
-    <select class="chosen-select" id="course-select" data-placeholder="Choose courses..." name="courses[]" style="width:600px;" multiple="">
+    <select style="display: none; width: 600px" class="chosen-select" id="course-select" data-placeholder="Choose courses..." name="courses[]" multiple="">
     </select>
   </form>
   <br />
@@ -17,24 +17,27 @@
   <a id="practicals" class="calendar-link" href="./practicals.ics">Practicals</a>
   <a id="classes" class="calendar-link" href="./classes.ics">Classes</a>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.js" type="text/javascript"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript">
     $( function() {
       $.ajax("./api/coursenames").done(function(data){
-        console.log(data);
+        var select = $("#course-select")
         data.forEach(function(name){
-          $("#course-select").append($("<option></option>")
+          select.append($("<option></option>")
            .attr("value", name).text(name));
         })
-        $("#course-select")
-         .chosen({})
-         .change(function() {
-           var query = $(this).serialize();
-           $("a[href].calendar-link").each(function () {
-             $(this).attr("href", "./" + $(this).attr('id') + ".ics?" + query )
-           });
-         });
+        select.trigger("chosen:updated");
       })
+      $("#course-select")
+       .show()
+       .chosen({})
+       .change(function() {
+         var query = $(this).serialize();
+         $("a[href].calendar-link").each(function () {
+           $(this).attr("href", "./" + $(this).attr('id') + ".ics?" + query )
+         });
+       })
+       .trigger("chosen:updated");;
     });
 
   </script>
