@@ -9,13 +9,17 @@
 <body>
   Select your courses, then select which calendar you want!<br />
   <form>
-    <select style="display: none; width: 600px" class="chosen-select" id="course-select" data-placeholder="Choose courses..." name="courses[]" multiple="">
-    </select>
-  </form>
-  <br />
+    <select style="display: none; width: 600px" class="chosen-select" id="course-select" data-placeholder="Choose courses..." name="courses[]" multiple=""></select>
+  </form><br />
   <a id="lectures" class="calendar-link" href="./lectures.ics">Lectures</a>
   <a id="practicals" class="calendar-link" href="./practicals.ics">Practicals</a>
   <a id="classes" class="calendar-link" href="./classes.ics">Classes</a>
+  <br />
+  <hr style=" border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3);">
+  <footer style="font-size:12px; color:#575757">
+    Made by <a href="//www.edshaw.me">Ed Shaw</a>. Uses <a href="https://www.ruby-lang.org/en/">Ruby</a>, <a href="http://www.padrinorb.com/">Padrino</a>, <a href="http://ri-cal.rubyforge.org/">RiCal</a> <a href="http://jquery.com/">jQuery</a> and <a href="http://harvesthq.github.io/chosen/"> Chosen.</a></footer>
+  </footer>
+
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript">
@@ -39,7 +43,6 @@
        })
        .trigger("chosen:updated");;
     });
-
   </script>
 </body>
 </html>

@@ -93,6 +93,5 @@ module Calmanac
       content_type :json
       JSON.generate(names.to_a)
     end
-
   end
 end
