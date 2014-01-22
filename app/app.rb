@@ -78,12 +78,18 @@ module Calmanac
     require 'set'
     require 'json'
 
-    get '/api/coursenames' do
+    def self.get_courses
       cal_uri = 'http://www.cs.ox.ac.uk/feeds/Timetable-Lecture.ics'
       components = get_components(cal_uri)
       names = Set.new
-      components[0].events.each {|event| names.add(event.summary)}
+      components[0].events.each { |event| names.add(event.summary) }
+      names
+    end
 
+    get '/api/coursenames' do
+      names = get_courses
+
+      content_type :json
       JSON.generate(names.to_a)
     end
 
