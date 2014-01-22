@@ -11,6 +11,9 @@ ruby '2.0.0'
 # Optional JSON codec (faster performance)
 # gem 'oj'
 
+#Heroku
+gem 'oboe-heroku'
+
 #calmanac requirements
 gem 'ri_cal'
 
