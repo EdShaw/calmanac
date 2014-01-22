@@ -21,20 +21,21 @@
   <script type="text/javascript">
     $( function() {
       $.ajax("./api/coursenames").done(function(data){
-        data.foreach(function(name){
+        console.log(data);
+        data.forEach(function(name){
           $("#course-select").append($("<option></option>")
            .attr("value", name).text(name));
         })
+        $("#course-select")
+         .chosen({})
+         .change(function() {
+           var query = $(this).serialize();
+           $("a[href].calendar-link").each(function () {
+             $(this).attr("href", "./" + $(this).attr('id') + ".ics?" + query )
+           });
+         });
       })
     });
-    $("#course-select")
-      .chosen({})
-      .change(function() {
-       var query = $(this).serialize();
-       $("a[href].calendar-link").each(function () {
-         $(this).attr("href", "./" + $(this).attr('id') + ".ics?" + query )
-       });
-     });
 
   </script>
 </body>
