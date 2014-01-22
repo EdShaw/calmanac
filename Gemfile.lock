@@ -4,12 +4,11 @@ GEM
     activesupport (3.2.16)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    haml (4.0.5)
-      tilt
     http_router (0.11.0)
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
     i18n (0.6.9)
+    json (1.8.1)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -18,6 +17,10 @@ GEM
     mocha (1.0.0)
       metaclass (~> 0.0.1)
     multi_json (1.8.4)
+    oboe (2.4.0.1)
+      json
+    oboe-heroku (0.9.7.1)
+      oboe (>= 2.4.0.1)
     padrino (0.11.4)
       padrino-admin (= 0.11.4)
       padrino-cache (= 0.11.4)
@@ -59,7 +62,6 @@ GEM
     riot (0.12.7)
       rr
     rr (1.1.2)
-    sass (3.2.13)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -76,12 +78,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  haml
   mocha
+  oboe-heroku
   padrino (= 0.11.4)
   rack-test
   rake
   redis
   ri_cal
   riot
-  sass

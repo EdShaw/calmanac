@@ -12,7 +12,7 @@ ruby '2.0.0'
 # gem 'oj'
 
 #Heroku
-gem 'oboe-heroku'
+gem 'oboe-heroku', :group => :production
 
 #calmanac requirements
 gem 'ri_cal'
@@ -21,8 +21,8 @@ gem 'ri_cal'
 gem 'rake'
 
 # Component requirements
-gem 'sass'
-gem 'haml'
+#gem 'sass'
+#gem 'haml'
 
 # Test requirements
 gem 'mocha', :group => 'test', :require => false
