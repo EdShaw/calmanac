@@ -29,7 +29,7 @@ module Calmanac
 
     def filter_calendar(url, courses)
 
-      components = get_compontents(url)
+      components = get_components(url)
       if courses then
         components[0].events.select! do |c|
           courses.include? c.summary
